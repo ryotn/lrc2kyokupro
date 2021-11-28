@@ -1,0 +1,79 @@
+﻿<Window x:Class="lrc2kyokupro.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:lrc2kyokupro"
+        mc:Ignorable="d"
+        Title="lrc2kyokupro" Height="400" Width="400" Icon="pack://siteoforigin:,,,/Resources/icon.ico" Background="#FF4D5057" ResizeMode="NoResize">
+    <Window.Resources>
+        <!-- スタイルだけ抜粋 -->
+        <Style x:Key="FlatButton" TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+            <Setter Property="Background" Value="#00AEEF"/>
+            <!-- デフォルトのテーマを無効化 -->
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="30" Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!-- マウスオーバーした時に色を変える -->
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Background.Color">
+                                <ColorAnimation From="#00AEEF" To="#6b6b6b"
+                                            Duration="0:0:0.2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Background.Color">
+                                <ColorAnimation From="#6b6b6b" To="#00AEEF"
+                                            Duration="0:0:0.2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Background.Color">
+                                <ColorAnimation From="#00AEEF" To="#008abd"
+                                            Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard TargetProperty="Background.Color">
+                                <ColorAnimation From="#008abd" To="#00AEEF"
+                                            Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+                
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="grid" Background="#FF4D5057">
+        <Button x:Name="btn_select" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="282" Height="54" Style="{StaticResource FlatButton}" Click="btn_select_Click">
+            <TextBlock Text="Select LRCfile" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="25"/>
+        </Button>
+        <TextBlock x:Name="lbl_fileName"  HorizontalAlignment="Center" Margin="0,100,0,0" VerticalAlignment="Top" Foreground="#FFD1D1D1" Width="372" Text="　" TextAlignment="Center" Height="16"/>
+        <Button x:Name="btn_save" Margin="0,132,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="282" Height="54" Style="{StaticResource FlatButton}" Click="btn_save_Click">
+            <TextBlock Text="Save file name" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="25"/>
+        </Button>
+        <TextBlock x:Name="lbl_outputName"  HorizontalAlignment="Center" Margin="10,202,10,0" VerticalAlignment="Top" Foreground="#FFD1D1D1" Width="372" Text="　" TextAlignment="Center"/>
+        <Button x:Name="btn_convert" Margin="0,0,0,30" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="282" Height="54" Style="{StaticResource FlatButton}" Click="btn_convert_Click">
+            <TextBlock Text="Convert" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="25"/>
+        </Button>
+    </Grid>
+</Window>
